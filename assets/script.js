@@ -46,4 +46,14 @@ $(document).ready(function() {
     evaluateTime();
     setInterval(function () {evaluateTime()}, 60000);
 
+    $(".saveBtn").on("click", function() {
+        var time = $(this).parent().parent().attr("data-time");
+        var note = $(this).prev().val();
+        console.log(time);
+        console.log(note);
+        day[(time - 9)].notes = note;
+        console.log(day[(time - 9)]);
+    })
+
+
 });
