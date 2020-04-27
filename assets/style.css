@@ -19,7 +19,7 @@ textarea {
   background-color: transparent;
   color: black;
   border-radius: 0;
-  border-bottom: 10px solid black;
+  border-bottom: 10px solid #26C485;
 }
 /* ??? */
 .description{
@@ -45,17 +45,17 @@ textarea {
 }
 
 .past {
-  background-color: #d3d3d3;
+  background-color: #AFC9CE;
   color: white;
 }
 
 .present {
-  background-color: #ff6961;
+  background-color: #FFF9A5;
   color: white;
 }
 
 .future {
-  background-color: #77dd77;
+  background-color: #CAE3E4;
   color: white;
 }
 
@@ -63,7 +63,7 @@ textarea {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-color: #06AED5;
+  background-color: #6A8EAE;
   color: white;
   line-height: 80px;
 }
@@ -71,6 +71,6 @@ textarea {
 .saveBtn:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
-  background-color: #089fc2;
+  background-color: #26C485;
   color: black;
 }
