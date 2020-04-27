@@ -10,6 +10,7 @@ $(document).ready(function() {
         {"time":"4PM","mTime":16,"notes":""},
         {"time":"5PM","mTime":17,"notes":""}
     ]
+    var localCopy = "";
 
     // Creates divs for each hour value of 'day' from html template.
     function createTimerBlock() {
@@ -19,6 +20,9 @@ $(document).ready(function() {
             newTime.removeAttr("id");
             newTime.attr("data-time", hour.mTime);
             newTime.find(".hour").text(hour.time);
+            if (localCopy) {
+                newTime.find("textarea").val(hour.notes);
+            }
             $(".container").append(newTime);
         }
         $("#template").remove();
@@ -39,12 +43,32 @@ $(document).ready(function() {
                 $(this).addClass("present");
             }
         });
-    }    
+    }
+    
+    function saveToLocal() {
+        localCopy = true;
+        localStorage.setItem("notes",JSON.stringify(day));
+        localStorage.setItem("saved",localCopy);
+    }
+
+    function loadLocal() {
+        localCopy = localStorage.getItem("saved");
+        console.log(localCopy);
+        if (localCopy) {
+           day = JSON.parse(localStorage.getItem("notes"));
+           console.log(day);
+        }
+    }
 
     $("#currentDay").text(moment().format('dddd, MMMM Do'));
+    loadLocal();
+    console.log(day);
     createTimerBlock();
     evaluateTime();
-    setInterval(function () {evaluateTime()}, 60000);
+    setInterval(function () {
+        evaluateTime();
+        // saveToLocal();
+    }, 60000);
 
     $(".saveBtn").on("click", function() {
         var time = $(this).parent().parent().attr("data-time");
@@ -53,6 +77,7 @@ $(document).ready(function() {
         console.log(note);
         day[(time - 9)].notes = note;
         console.log(day[(time - 9)]);
+        saveToLocal();
     })
 
 
