@@ -3,7 +3,7 @@ $(document).ready(function() {
         {"time":"9AM","mTime":9,"notes":""},
         {"time":"10AM","mTime":10,"notes":""},
         {"time":"11AM","mTime":11,"notes":""},
-        {"time":"12AM","mTime":12,"notes":""},
+        {"time":"12PM","mTime":12,"notes":""},
         {"time":"1PM","mTime":13,"notes":""},
         {"time":"2PM","mTime":14,"notes":""},
         {"time":"3PM","mTime":15,"notes":""},
