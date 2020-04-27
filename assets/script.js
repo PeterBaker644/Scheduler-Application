@@ -1,7 +1,4 @@
 $(document).ready(function() {
-
-    $("#currentDay").text(moment().format('dddd, MMMM Do'));
-
     var day = [
         {"time":"9AM","mTime":9,"notes":""},
         {"time":"10AM","mTime":10,"notes":""},
@@ -15,14 +12,16 @@ $(document).ready(function() {
     ]
 
     // Creates divs for each hour value of 'day' from html template.
-    function createTimerBlock(hour) {
-        var newTime = $("#template").clone();
-        console.log(hour);
-        newTime.removeAttr("id");
-        newTime.attr("data-time", hour.mTime);
-        console.log(newTime);
-        newTime.find(".hour").text(hour.time);
-        $(".container").append(newTime);
+    function createTimerBlock() {
+        for (var i = 0; i < day.length; i++) {
+            var hour = day[i];
+            var newTime = $("#template").clone();
+            newTime.removeAttr("id");
+            newTime.attr("data-time", hour.mTime);
+            newTime.find(".hour").text(hour.time);
+            $(".container").append(newTime);
+        }
+        $("#template").remove();
     }
 
     // Updates the css style of time-block based on the current time.
@@ -40,17 +39,11 @@ $(document).ready(function() {
                 $(this).addClass("present");
             }
         });
-    }
+    }    
 
-    for (var i = 0; i < day.length; i++) {
-        var hour = day[i];
-        createTimerBlock(hour);
-    }
-
-    $("#template").remove();
-
+    $("#currentDay").text(moment().format('dddd, MMMM Do'));
+    createTimerBlock();
     evaluateTime();
-
     setInterval(function () {evaluateTime()}, 60000);
 
 });
