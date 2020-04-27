@@ -14,6 +14,7 @@ $(document).ready(function() {
         {"time":"5PM","mTime":17,"notes":""}
     ]
 
+    // Creates divs for each hour value of 'day' from html template.
     function createTimerBlock(hour) {
         var newTime = $("#template").clone();
         console.log(hour);
@@ -24,13 +25,22 @@ $(document).ready(function() {
         $(".container").append(newTime);
     }
 
+    // Updates the css style of time-block based on the current time.
     function evaluateTime() {
-        if (moment().isAfter($(".time-block").attr("data-time"))) {
-            console.log("It's past that time.")
-        }
+        $(".time-block").each (function() {
+            hourField = Number($(this).attr("data-time"));
+            currentHour = Number(moment().format("k"));
+            if (hourField < currentHour) {
+                $(this).addClass("past");
+            } else if (hourField > currentHour) {
+                $(this).removeClass("present");
+                $(this).addClass("future");
+            } else {
+                $(this).removeClass("past");
+                $(this).addClass("present");
+            }
+        });
     }
-
-    console.log("time is " + moment().format("hA"))
 
     for (var i = 0; i < day.length; i++) {
         var hour = day[i];
@@ -39,11 +49,8 @@ $(document).ready(function() {
 
     $("#template").remove();
 
-       
+    evaluateTime();
 
-
-    // Do we set an updating timer that checks every minute if the hour has changed?
-
-    // console.log($(".time-block").attr("data-time").match(/[0-9]+/g).toString());
+    setInterval(function () {evaluateTime()}, 60000);
 
 });
