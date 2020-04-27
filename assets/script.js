@@ -53,16 +53,13 @@ $(document).ready(function() {
 
     function loadLocal() {
         localCopy = localStorage.getItem("saved");
-        console.log(localCopy);
         if (localCopy) {
            day = JSON.parse(localStorage.getItem("notes"));
-           console.log(day);
         }
     }
 
     $("#currentDay").text(moment().format('dddd, MMMM Do'));
     loadLocal();
-    console.log(day);
     createTimerBlock();
     evaluateTime();
     setInterval(function () {
@@ -73,12 +70,7 @@ $(document).ready(function() {
     $(".saveBtn").on("click", function() {
         var time = $(this).parent().parent().attr("data-time");
         var note = $(this).prev().val();
-        console.log(time);
-        console.log(note);
         day[(time - 9)].notes = note;
-        console.log(day[(time - 9)]);
         saveToLocal();
     })
-
-
 });
